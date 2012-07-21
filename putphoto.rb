@@ -1,9 +1,11 @@
 require "FileUtils"
 
 def set_path_for(file)
-  # "/../" + 
-  # modified_year(file) + "/" + 
-  modified_date(file)
+  # use this path when this file sits in "Dropbox/Camera Uploads"
+  # "/../Media/Drews Pictures" + modified_year(file) + "/" + modified_date(file)
+
+  # use this path when testing in the same foulder as the script
+  "./" + modified_date(file)
 end
 
 def modified_date(file)
@@ -55,11 +57,10 @@ end
 
 Dir.glob('*.{jpg,jpeg,png,gif,mov}') do |file|
   path = set_path_for(file)
+  #path_for_move = set_path_for
   if directory_already_exists_at(path)
-    puts "The directory for #{file} exists at #{path}"
     file_exists?(file,path) ? discard_file(file) : move_file(file,path)
   else
-    puts "No directory for #{file} at #{path}"
     make_directory(path)
     move_file(file,path)
   end
