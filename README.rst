@@ -7,7 +7,7 @@ This is a little command line utlilty I hacked together in Ruby to save me time.
 Background
 ==========
 
-I use 'Dropbox <https://www.dropbox.com/>`_ on my laptop, desktop, and iPhone to back up and share files.
+I use 'Dropbox <https://www.dropbox.com/>`_ on my laptop, desktop, and iPhone to back up and share files. 
 
 The iPhone's Dropbox app can upload the phone's photos and videos to my Dropbox. These files end up in "Dropbox\Camera Uploads".
 
