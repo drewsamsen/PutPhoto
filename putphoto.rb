@@ -19,7 +19,7 @@ require "FileUtils"
 
 def set_path_for(file)
   # PRODUCTION USE - use this path when this file sits in "Dropbox/Camera Uploads"
-  # "/../Media/Drews Pictures" + modified_year(file) + "/" + modified_date(file)
+  # "../Media/Drews Pictures" + modified_year(file) + "/" + modified_date(file)
 
   # TESTING USE - use this path when testing in the same foulder as the script
   "./" + modified_date(file)
