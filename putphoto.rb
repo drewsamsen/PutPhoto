@@ -11,6 +11,8 @@
 #
 # ===========================================================================
 
+PATH_BASE = "../Media/Drews Pictures"
+
 require "FileUtils"
 
 # The first method sets the destination path for where the file needs to end up.
@@ -19,10 +21,10 @@ require "FileUtils"
 
 def set_path_for(file)
   # PRODUCTION USE - use this path when this file sits in "Dropbox/Camera Uploads"
-  # "../Media/Drews Pictures" + modified_year(file) + "/" + modified_date(file)
+  PATH_BASE + "/" + modified_year(file) + "/" + modified_date(file)
 
   # TESTING USE - use this path when testing in the same foulder as the script
-  "./" + modified_date(file)
+  # "./" + modified_date(file)
 end
 
 
@@ -87,9 +89,21 @@ def move_file(file,path)
 end
 
 
+# Make the directory for the file's year if needed
+
+def make_year_directory(file)
+  year_path = PATH_BASE + "/" + modified_year(file)
+  unless directory_already_exists_at(year_path)
+    puts "Making YEAR directory: #{year_path}"
+    Dir.mkdir(year_path)
+  end
+end
+
+
 # Create a destination folder if it does not exist already
 
 def make_directory(path)
+  puts "Making directory: #{path}"
   Dir.mkdir(path)
 end
 
@@ -105,7 +119,7 @@ end
 # This moves duplicate files into a new directory called "duplicates"
 
 def discard_file(file)
-  if directory_already_exists_at("./duplicates") 
+  if directory_already_exists_at("./duplicates")
     move_file(file,"./duplicates")
   else
     make_directory("./duplicates")
@@ -123,6 +137,7 @@ Dir.glob('*.{jpg,jpeg,png,gif,mov}') do |file|
   if directory_already_exists_at(path)
     file_exists?(file,path) ? discard_file(file) : move_file(file,path)
   else
+    make_year_directory(file)
     make_directory(path)
     move_file(file,path)
   end
