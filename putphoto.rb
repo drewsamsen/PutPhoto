@@ -12,6 +12,7 @@
 # ===========================================================================
 
 PATH_BASE = "../Media/Drews Pictures"
+FILE_TYPES = %w(jpg jpeg png gif mov mp4)
 
 require "FileUtils"
 
@@ -132,7 +133,7 @@ end
 # Notice that I am moving various image files as well as iPhone video clips (.mov)
 # since I use this script primarily to organize files from my iPhone
 
-Dir.glob('*.{jpg,jpeg,png,gif,mov}') do |file|
+Dir.glob("*.{#{FILE_TYPES.join(',')}}") do |file|
   path = set_path_for(file)
   if directory_already_exists_at(path)
     file_exists?(file,path) ? discard_file(file) : move_file(file,path)
