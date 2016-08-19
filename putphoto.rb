@@ -131,9 +131,10 @@ end
 
 # Finally, here is where the script is executed!
 # Notice that I am moving various image files as well as iPhone video clips (.mov)
-# since I use this script primarily to organize files from my iPhone
+# since I use this script primarily to organize files from my iPhone. (Case
+# insensitive on the file extension)
 
-Dir.glob("*.{#{FILE_TYPES.join(',')}}") do |file|
+Dir.glob("*.{#{FILE_TYPES.join(',')}}", File::FNM_CASEFOLD) do |file|
   path = set_path_for(file)
   if directory_already_exists_at(path)
     file_exists?(file,path) ? discard_file(file) : move_file(file,path)
